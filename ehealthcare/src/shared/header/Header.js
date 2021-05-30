@@ -1,30 +1,51 @@
 
 import './Header.css';
 import { Button } from 'primereact/button';
+import { useHistory } from 'react-router-dom';
 
 function Header() {
-  return (
-    <nav className="navbar navbar-light bg-light">
-    {/* <span [routerLink]="''" class="header">E-Healthcare</span> */}
-    <div style="display: flex" *ngIf="user && user.isAdmin">
-        <a class="menu" *ngIf="user" [routerLink]="'/product'" href="javascript:void(0)">Products</a>&nbsp;&nbsp;&nbsp;
-        <a class="menu" *ngIf="user" [routerLink]="'/category'" href="javascript:void(0)">Categories</a>
-    </div>
-    <div style="display: flex; float: right;">
-        <a *ngIf="user" [routerLink]="'/cart'" href="javascript:void(0)"><i class="pi pi-shopping-cart"></i></a>
-        <h6 *ngIf="user">Hello, {user.firstName} &nbsp;&nbsp;</h6>
 
-    <Button label="LogOut" className="p-button-warning" icon="pi pi-user" />
-    <Button label="LogOut" className="p-button-warning" icon="pi pi-power-off" />
-        {/* <button *ngIf="!user" type="button" (click)="handleSignIn()" pButton label="Sign In" icon="pi pi-user"
-            style="margin-left:.25em"></button>
-        <button *ngIf="user" type="button" (click)="handleSignOut()" pButton label="Logout" icon="pi pi-power-off"
-            style="margin-left:.25em"></button> */}
-    </div>
-</nav>
+    const history = useHistory();
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    function handleSignIn() {
+        history.push('/login');
+    }
 
+    function handleSignOut() {
+        sessionStorage.removeItem('user');
+        history.push('/login');
+    }
 
-  );
+    return (
+        <nav className="navbar navbar-light bg-light">
+            <span className="header">E-Healthcare</span>
+            {
+                user && user.isAdmin &&
+                <div style={{ display: "flex" }} >
+                    <a className="menu" href="/products">Products</a>&nbsp;&nbsp;&nbsp;
+                    <a className="menu" href="/categories">Categories</a>
+                </div>
+            }
+
+            <div style={{ display: "flex", float: "right" }}>
+                {
+                    user && user.isAdmin &&
+                    <span>
+                        <a href="javascript:void(0)"><i class="pi pi-shopping-cart"></i></a>
+                        <h6>Hello, {user.firstName} &nbsp;&nbsp;</h6>
+                    </span>
+                }
+                {
+                    !user && <Button className="p-button-warning" type="button" onClick={handleSignIn} pButton label="Sign In" icon="pi pi-user"
+                        style={{ marginLeft: ".25em" }}></Button>
+                }
+                {
+                    user && <Button className="p-button-warning" type="button" onClick={handleSignOut} pButton label="Logout" icon="pi pi-power-off"
+                        style={{ marginLeft: ".25em" }}></Button>
+                }
+            </div >
+        </nav >
+    );
 }
 
 export default Header;
