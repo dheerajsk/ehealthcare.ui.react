@@ -36,11 +36,11 @@ function Header() {
                     </span>
                 }
                 {
-                    !user && <Button className="p-button-warning" type="button" onClick={handleSignIn} pButton label="Sign In" icon="pi pi-user"
+                    !user && <Button className="p-button-warning" type="button" onClick={handleSignIn} label="Sign In" icon="pi pi-user"
                         style={{ marginLeft: ".25em" }}></Button>
                 }
                 {
-                    user && <Button className="p-button-warning" type="button" onClick={handleSignOut} pButton label="Logout" icon="pi pi-power-off"
+                    user && <Button className="p-button-warning" type="button" onClick={handleSignOut} label="Logout" icon="pi pi-power-off"
                         style={{ marginLeft: ".25em" }}></Button>
                 }
             </div >

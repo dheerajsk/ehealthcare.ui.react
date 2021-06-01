@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react"
 import './ListProduct.css';
+import { useHistory } from 'react-router-dom';
 
 function ListProduct() {
 
     const [products, setProducts] = useState([]);
+    const history = useHistory();
 
     useEffect(() => {
         fetch("https://localhost:44303/api/Product").then(res => res.json()).then(res => {
@@ -12,11 +14,11 @@ function ListProduct() {
     }, []);
 
     function handleAdd() {
-
+        history.replace('/product/0');
     }
 
-    function handleRowClick(event){
-        console.log(event);
+    function handleRowClick(event) {
+        history.replace('/product/' + event.id);
     }
 
     return (
@@ -41,7 +43,7 @@ function ListProduct() {
                     <tbody>
                         {
                             products.map(product =>
-                                <tr onClick={()=>handleRowClick(product)}>
+                                <tr onClick={() => handleRowClick(product)}>
                                     <td scope="row">{product.id}</td>
                                     <td>{product.category.name}</td>
                                     <td>{product.name}</td>

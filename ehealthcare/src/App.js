@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 import Header from './shared/header/Header';
 import Home from './home/home/Home';
 import ListProducts from './product/ListProduct';
-
+import ProductForm from './product/ProductForm';
 
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
@@ -14,6 +14,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Footer from './shared/footer/Footer';
 import SignIn from './auth/signin/SignIn';
 import ListCategory from './category/ListCategory';
+import CategoryForm from './category/CategoryForm';
 
 function App() {
   return (
@@ -31,9 +32,19 @@ function App() {
         <ListProducts />
         <Footer></Footer>
       </Route>
+      <Route path="/product/:id">
+        <Header></Header>
+        <ProductForm />
+        <Footer></Footer>
+      </Route>
       <Route path="/categories">
         <Header></Header>
         <ListCategory />
+        <Footer></Footer>
+      </Route>
+      <Route path="/category/:id">
+        <Header></Header>
+        <CategoryForm />
         <Footer></Footer>
       </Route>
     </div>

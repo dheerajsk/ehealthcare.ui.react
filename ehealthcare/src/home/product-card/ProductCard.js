@@ -11,7 +11,7 @@ function ProductCard(props) {
 
     const header = (<img alt="Card" height="350px" src={product.imgSrc} />);
     const footer = (<Button label="Add to Cart" onClick={handleAddToCartClick} icon="pi pi-shopping-cart" className="p-button-raised p-button-warning"
-        style={{ 'margin-left': '.5em', align: 'center' }} >
+        style={{ marginLeft: '.5em', align: 'center' }} >
     </Button>);
     return (
         <Card footer={footer} header={header} title={product.name} subTitle={product.category.name} style={{ width: "360px", color: "darkslateblue" }}
